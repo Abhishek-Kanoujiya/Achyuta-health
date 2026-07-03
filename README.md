@@ -53,8 +53,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 This application is fully deployed and hosted live on **Vercel** with a **Neon PostgreSQL** cloud database. 
 
-You do not need to run `npm run dev` to view the live site. Simply visit the Vercel URL provided in your Vercel Dashboard!
-
 ## API Documentation
 - `POST /api/register` - Register a new user (Patient/Doctor/Admin).
 - `GET /api/patient/doctors` - Fetch all available doctors and their profiles.
