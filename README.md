@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Achyuta Health - Appointment & Follow-up Manager
 
-## Getting Started
+A comprehensive healthcare appointment platform built with Next.js, Prisma, PostgreSQL, and Google Gemini AI.
 
-First, run the development server:
+## Features
+- **Role-based Access:** Separate portals for Patients, Doctors, and Admins.
+- **Smart Booking:** Strict double-booking prevention using database-level constraints.
+- **AI Integration (Gemini):**
+  - **Pre-visit:** Analyzes patient symptoms to generate urgency levels and suggested questions.
+  - **Post-visit:** Converts clinical notes into patient-friendly summaries.
+- **Notifications:** Ready for Email and Google Calendar integration.
 
+## Setup Guide
+
+### 1. Prerequisites
+- Node.js 18+
+- A PostgreSQL Database (e.g., Neon or Supabase)
+- A Google Gemini API Key
+
+### 2. Installation
+Clone the repository and install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Variables
+Create a `.env` file in the root directory and add the following:
+```env
+DATABASE_URL="postgresql://user:password@host/dbname?sslmode=require"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+GEMINI_API_KEY="your-gemini-api-key"
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Database Setup
+Push the Prisma schema to your database and generate the client:
+```bash
+npx prisma db push
+npx prisma generate
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 5. Running the App
+Start the development server:
+```bash
+npm run dev
+```
+Open `http://localhost:3000` in your browser.
 
-## Learn More
+## API Documentation
+- `POST /api/register` - Register a new user (Patient/Doctor/Admin).
+- `GET /api/patient/doctors` - Fetch all available doctors and their profiles.
+- `POST /api/appointments` - Book an appointment and generate AI pre-visit summary.
+- `POST /api/admin/doctors` - Create or update a doctor's profile.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deliverables Checklist
+- [x] Complete source code (Next.js App Router)
+- [x] README with setup guide, .env.example, API docs
+- [x] DB Schema (located in `/prisma/schema.prisma`)
+- [x] System design write-up (located in `System_Design.md`)

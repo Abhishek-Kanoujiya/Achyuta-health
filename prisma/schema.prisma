@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DOCTOR
+  PATIENT
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CANCELLED
+  COMPLETED
+}
+
+enum UrgencyLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(PATIENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  avatarUrl     String?
+
+  doctorProfile DoctorProfile?
+  patientAppointments Appointment[] @relation("PatientAppointments")
+  doctorAppointments  Appointment[] @relation("DoctorAppointments")
+}
+
+model DoctorProfile {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  specialization String
+  workingHours   String   // e.g., "09:00-17:00"
+  slotDuration   Int      // in minutes, e.g., 30
+  leaveDays      String[] // Array of dates in "YYYY-MM-DD" format
+}
+
+model Appointment {
+  id             String   @id @default(uuid())
+  patientId      String
+  patient        User     @relation("PatientAppointments", fields: [patientId], references: [id])
+  doctorId       String
+  doctor         User     @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  
+  date           DateTime 
+  startTime      DateTime 
+  endTime        DateTime 
+  
+  status         AppointmentStatus @default(SCHEDULED)
+  
+  // Pre-visit details
+  symptoms       String?
+  symptomImageUrl String?
+  urgencyLevel   UrgencyLevel?
+  chiefComplaint String?
+  suggestedQuestions String? 
+
+  // Post-visit details
+  clinicalNotes  String?
+  postVisitSummary String? 
+  medicationSchedule String? 
+  followUpSteps  String?
+
+  googleEventId  String?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([doctorId, startTime, endTime])
+}
