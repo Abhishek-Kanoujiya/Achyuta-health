@@ -4,7 +4,7 @@ import Link from "next/link"
 import { CalendarClock, Activity, Star } from "lucide-react"
 
 export default function PatientDashboard() {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

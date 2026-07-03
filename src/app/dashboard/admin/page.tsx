@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
 export default function AdminDashboard() {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [editingDoctor, setEditingDoctor] = useState<any>(null)
   

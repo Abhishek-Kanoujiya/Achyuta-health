@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 
 export default function DoctorDashboard() {
-  const [appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedAppt, setSelectedAppt] = useState<any>(null)
   const [notes, setNotes] = useState("")
