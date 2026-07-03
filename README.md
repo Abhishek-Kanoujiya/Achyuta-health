@@ -39,12 +39,21 @@ npx prisma db push
 npx prisma generate
 ```
 
-### 5. Running the App
-Start the development server:
+### 5. Running the App Locally
+
+If you want to run the application on your own computer for development:
+
 ```bash
 npm run dev
 ```
-Open `http://localhost:3000` in your browser.
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 6. Live Deployment
+
+This application is fully deployed and hosted live on **Vercel** with a **Neon PostgreSQL** cloud database. 
+
+You do not need to run `npm run dev` to view the live site. Simply visit the Vercel URL provided in your Vercel Dashboard!
 
 ## API Documentation
 - `POST /api/register` - Register a new user (Patient/Doctor/Admin).
