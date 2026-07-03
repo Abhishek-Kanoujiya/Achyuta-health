@@ -41,8 +41,6 @@ npx prisma generate
 
 ### 5. Running the App Locally
 
-If you want to run the application on your own computer for development:
-
 ```bash
 npm run dev
 ```
