@@ -77,7 +77,7 @@ export async function POST(req: Request) {
   // Run asynchronously without blocking the response
   Promise.all([
     sendEmail({
-      to: session.user.email,
+      to: session.user.email as string,
       subject: "Appointment Confirmed - Achyuta Health",
       text: `Your appointment is confirmed for ${new Date(date).toLocaleDateString()} at ${new Date(startTime).toLocaleTimeString()}.`
     }),
