@@ -86,7 +86,7 @@ export async function POST(req: Request) {
       description: `Symptoms: ${symptoms}\nUrgency: ${urgencyLevel}`,
       startTime: new Date(startTime),
       endTime: new Date(endTime),
-      attendeeEmail: session.user.email
+      attendeeEmail: session.user.email as string
     })
   ]).catch(err => console.error("Failed to send notifications:", err))
 
